@@ -74,18 +74,29 @@ gemini
 
 ## 快速参考
 
-```bash
-# 基础生成（带代理）
-https_proxy=http://127.0.0.1:7890 gemini "创建 [描述]" --yolo -o text
+**推荐**：先配置 alias（见下文），后续命令更简洁。
 
-# 代码审查（管道方式）
-cat 文件路径 | https_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust -p "审查提示词"
+```bash
+# 基础生成
+pgemini -p "创建 [描述]" --yolo -o text
+
+# 代码审查（管道方式，正确 fallback）
+cat 文件路径 | pgeminip -p "审查提示词" || cat 文件路径 | pgeminif -p "审查提示词"
 
 # 网络研究
-https_proxy=http://127.0.0.1:7890 gemini "搜索 [主题] 最新信息" -o text
+pgemini -p "搜索 [主题] 最新信息" -o text
 
 # 架构分析
-https_proxy=http://127.0.0.1:7890 gemini "用 codebase_investigator 分析项目" -o text
+pgemini -p "用 codebase_investigator 分析项目" -o text
+```
+
+### Shell Alias 配置
+
+```bash
+# 添加到 ~/.zshrc 或 ~/.bashrc
+alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
+alias pgeminif='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
+alias pgeminip='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
 ```
 
 ## 为什么在 Claude Code 中使用 Gemini？
