@@ -22,7 +22,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/gemini-cli-skills.git
+git clone https://github.com/Asura-2010/gemini-cli-skills.git
 
 # 复制到 Claude Code skills 目录
 cp -r gemini-cli-skills ~/.claude/skills/gemini-cli
