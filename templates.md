@@ -1,4 +1,4 @@
-# Gemini CLI Prompt Templates (升级版)
+# Gemini CLI Prompt Templates
 
 可复用的提示词模板，已更新模型版本并改进代码审查流程。
 

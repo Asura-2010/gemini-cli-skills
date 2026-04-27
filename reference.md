@@ -1,6 +1,6 @@
-# Gemini CLI Command Reference (升级版)
+# Gemini CLI Command Reference
 
-Gemini CLI v0.16.0+ 完整参考，已更新模型版本并加入国内环境适配。
+Gemini CLI v0.16.0+ 完整参考，已更新模型版本并加入代理环境适配。
 
 ## 安装
 
@@ -20,7 +20,7 @@ export GEMINI_API_KEY=your_key
 gemini  # First run prompts for auth
 ```
 
-## 国内环境代理配置
+## 代理环境配置
 
 ### 检查当前代理
 
@@ -79,7 +79,7 @@ echo 'export https_proxy=http://127.0.0.1:7890' >> ~/.zshrc
 echo 'export http_proxy=http://127.0.0.1:7890' >> ~/.zshrc
 ```
 
-> **注意**：全局代理会影响所有需要网络的命令，包括不需要代理的国内服务。推荐使用 alias 方式。
+> **注意**：全局代理会影响所有需要网络的命令。推荐使用 alias 方式，只对 Gemini 命令生效。
 
 ## 命令行参数
 
@@ -360,7 +360,7 @@ gemini "Review @./src/main.js for bugs" -o text
 | "Rate limit exceeded" | 等待自动重试或使用 Flash |
 | "Context too large" | 使用 `.geminiignore` 或精确指定 |
 | "Tool call failed" | 检查 JSON 统计获取详情 |
-| 国内网络超时 | 检查代理设置 |
+| `network timeout` | 网络超时 | 检查代理设置或网络连接 |
 
 ### 调试模式
 

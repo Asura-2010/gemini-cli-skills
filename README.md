@@ -1,13 +1,17 @@
-# Gemini CLI Skill for Claude Code (升级版)
+# Gemini CLI Skill for Claude Code
 
-整合 Google Gemini CLI 作为 Claude Code 的强力辅助工具，专为国内环境优化。
+整合 Google Gemini CLI 作为 Claude Code 的强力辅助工具，专为需要代理的网络环境优化。
 
-## 升级特性
+> 基于 [forayconsulting/gemini_cli_skill](https://github.com/forayconsulting/gemini_cli_skill) 扩展，感谢原作者的贡献。
 
-相比原版，本版本包含：
+## 增强特性
+
+本版本在原版基础上增强了：
 - **模型版本更新**：支持 Gemini 3.x 系列
-- **国内环境适配**：详细的代理配置指南
+- **代理环境适配**：详细的代理配置指南，适配需要代理访问 Google API 的网络环境
 - **结构化代码审查**：专业审查流程和规则
+- **Shell Alias 配置**：简化命令输入
+- **常见错误码说明**：快速定位问题
 
 ## 功能概述
 
@@ -34,7 +38,7 @@ cp -r gemini-cli-skills ~/.claude/skills/gemini-cli
 
 - [Gemini CLI](https://github.com/google-gemini/gemini-cli) 已安装
 - Gemini API key 或 OAuth 认证已配置
-- **国内环境**：需要代理访问 Google API
+- **需要代理的网络环境**：需配置代理访问 Google API
 
 ```bash
 # 安装 Gemini CLI
@@ -94,6 +98,7 @@ pgemini -p "用 codebase_investigator 分析项目" -o text
 
 ```bash
 # 添加到 ~/.zshrc 或 ~/.bashrc
+# 根据实际代理软件调整端口（示例为 Clash 默认端口 7890）
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
 alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
 alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'

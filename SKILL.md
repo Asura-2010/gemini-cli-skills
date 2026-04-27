@@ -1,6 +1,6 @@
 ---
 name: gemini-cli
-description: Wield Google's Gemini CLI as a powerful auxiliary tool for code generation, review, analysis, and web research. Use when tasks benefit from a second AI perspective, current web information via Google Search, codebase architecture analysis, or parallel code generation. Also use when user explicitly requests Gemini operations. 国内环境需配置代理。
+description: Wield Google's Gemini CLI as a powerful auxiliary tool for code generation, review, analysis, and web research. Use when tasks benefit from a second AI perspective, current web information via Google Search, codebase architecture analysis, or parallel code generation. Also use when user explicitly requests Gemini operations. 需代理的网络环境需配置代理。
 allowed-tools:
   - Bash
   - Read
@@ -9,19 +9,19 @@ allowed-tools:
   - Glob
 ---
 
-# Gemini CLI Integration Skill (升级版)
+# Gemini CLI Integration Skill
 
-整合 Gemini CLI (v0.16.0+) 与 Gemini 3.x 系列，专为国内环境优化。
+整合 Gemini CLI (v0.16.0+) 与 Gemini 3.x 系列，专为需要代理的网络环境优化。
 
 ## 前提条件
 
 - Gemini CLI 已安装并可用 (`gemini` 命令)
 - 已通过 Google 账户认证
-- **网络要求**：国内需开启系统代理访问 Google API
+- **网络要求**：需代理的网络环境需配置代理访问 Google API
 
-## 代理配置（国内环境必读）
+## 代理配置（需代理的网络环境必读）
 
-Gemini CLI 需要访问 Google API，在国内环境必须使用代理。
+Gemini CLI 需要访问 Google API，在需要代理的网络环境必须使用代理。
 
 ### 检查代理状态
 
@@ -118,7 +118,7 @@ command -v gemini || which gemini
 ### 2. 基本命令模式
 
 ```bash
-# 国内环境带代理（使用 alias 后）
+# 需代理的网络环境带代理（使用 alias 后）
 pgemini -p "[prompt]" --yolo -o text
 
 # 或完整写法

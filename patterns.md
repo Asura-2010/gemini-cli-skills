@@ -1,4 +1,4 @@
-# Gemini CLI Integration Patterns (升级版)
+# Gemini CLI Integration Patterns
 
 高级 Gemini CLI 集成模式，已更新模型版本。
 

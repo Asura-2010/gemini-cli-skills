@@ -1,4 +1,4 @@
-# Gemini CLI Built-in Tools (升级版)
+# Gemini CLI Built-in Tools
 
 Gemini CLI 内置工具参考，模型版本已更新。
 
