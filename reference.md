@@ -35,11 +35,12 @@ echo "https_proxy=$https_proxy http_proxy=$http_proxy"
 ```bash
 # 添加到 ~/.zshrc 或 ~/.bashrc
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
-alias pgeminif='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
-alias pgeminip='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
+alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
+alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
 
 # 后续命令简化为：
-pgeminip -p "提示词"
+pgemini-pro -p "提示词"
+pgemini-flash -p "提示词"  # 快速模型
 ```
 
 ### 代理地址参考
@@ -103,13 +104,13 @@ echo 'export http_proxy=http://127.0.0.1:7890' >> ~/.zshrc
 
 ```bash
 # 首选 Pro 模型（使用 alias）
-pgeminip -p "复杂分析" -o text
+pgemini-pro -p "复杂分析" -o text
 
 # 快速模型（使用 alias）
-pgeminif -p "简单任务" -o text
+pgemini-flash -p "简单任务" -o text
 
 # Pro 失败自动切换 Flash（正确写法：重复传递输入）
-cat file.js | pgeminip -p "审查" || cat file.js | pgeminif -p "审查"
+cat file.js | pgemini-pro -p "审查" || cat file.js | pgemini-flash -p "审查"
 ```
 
 ### 会话管理

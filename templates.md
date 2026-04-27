@@ -51,7 +51,7 @@ pgemini -p "创建一个 React hook useLocalStorage，同步状态与 localStora
 
 ```bash
 # 正确写法：重复传递 cat 输入
-cat 文件路径 | pgeminip -p "
+cat 文件路径 | pgemini-pro -p "
 请作为资深软件工程师，审核以下代码（文件路径：[路径]，技术栈：[栈]）。
 
 请重点从以下维度审查，按优先级输出：
@@ -62,13 +62,13 @@ cat 文件路径 | pgeminip -p "
 
 保持精简客观。
 注意：请输出精简的修改建议（如 Patch 格式或只展示改动的前后几行），严禁重写未修改的大段原始代码。
-" || cat 文件路径 | pgeminif -p "同上提示词"
+" || cat 文件路径 | pgemini-flash -p "同上提示词"
 ```
 
 ### 安全专项审查
 
 ```bash
-cat 文件路径 | pgeminip -p "
+cat 文件路径 | pgemini-pro -p "
 审查此代码的安全漏洞，包括：
 - XSS（跨站脚本攻击）
 - SQL 注入
@@ -83,7 +83,7 @@ cat 文件路径 | pgeminip -p "
 ### 性能审查
 
 ```bash
-cat 文件路径 | pgeminip -p "
+cat 文件路径 | pgemini-pro -p "
 分析此代码的性能问题：
 - 低效算法
 - 内存泄漏
@@ -97,7 +97,7 @@ cat 文件路径 | pgeminip -p "
 ### Git Diff 审查
 
 ```bash
-git diff | pgeminip -p "
+git diff | pgemini-pro -p "
 审查这些 Git 变更：
 1. 功能完整性
 2. 潜在 bug
@@ -105,7 +105,7 @@ git diff | pgeminip -p "
 4. 代码质量
 
 保持精简，列出关键问题。
-" || git diff | pgeminif -p "同上提示词"
+" || git diff | pgemini-flash -p "同上提示词"
 ```
 
 ## Bug 修复

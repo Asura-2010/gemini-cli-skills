@@ -2,7 +2,7 @@
 
 高级 Gemini CLI 集成模式，已更新模型版本。
 
-> **前提**：以下示例假设已配置 `pgemini`、`pgeminip`、`pgeminif` alias。如未配置，请自行添加代理变量。alias 配置方法见 SKILL.md。
+> **前提**：以下示例假设已配置 `pgemini`、`pgemini-pro`、`pgemini-flash` alias。如未配置，请自行添加代理变量。alias 配置方法见 SKILL.md。
 
 ## Pattern 1: Generate-Review-Fix 循环
 
@@ -102,22 +102,22 @@ pgemini -p "创建测试" --yolo -o text > tests.log 2>&1 &
 
 ```
 任务复杂吗（架构、多文件、深度分析）？
-├── 是 → 使用 Pro (gemini-3.1-pro-preview) → pgeminip
+├── 是 → 使用 Pro (gemini-3.1-pro-preview) → pgemini-pro
 └── 否 → 速度关键吗？
-    ├── 是 → 使用 Flash (gemini-3-flash-preview) → pgeminif
+    ├── 是 → 使用 Flash (gemini-3-flash-preview) → pgemini-flash
     └── 否 → 任务琐碎吗（格式化、简单查询）？
         ├── 是 → 使用 Flash Lite (gemini-2.5-flash-lite)
-        └── 否 → 使用 Flash (gemini-3-flash-preview) → pgeminif
+        └── 否 → 使用 Flash (gemini-3-flash-preview) → pgemini-flash
 ```
 
 ### 示例
 
 ```bash
 # 复杂：架构分析
-pgeminip -p "分析代码库架构" -o text
+pgemini-pro -p "分析代码库架构" -o text
 
 # 快速：简单格式化
-pgeminif -p "格式化此 JSON" -o text
+pgemini-flash -p "格式化此 JSON" -o text
 
 # 琐碎：一句话
 pgemini -m gemini-2.5-flash-lite -p "2+2等于几？" -o text
@@ -135,10 +135,10 @@ pgemini -m gemini-2.5-flash-lite -p "2+2等于几？" -o text
 
 ```bash
 # 高优先级：使用 Pro
-pgeminip -p "[重要任务]" -o text
+pgemini-pro -p "[重要任务]" -o text
 
 # 低优先级：使用 Flash（不同配额）
-pgeminif -p "[不那么关键的任务]" -o text
+pgemini-flash -p "[不那么关键的任务]" -o text
 ```
 
 ### 方法3：批量操作
@@ -272,8 +272,8 @@ pgemini -p "审查 server.js 问题并优化" -o text
 ```bash
 # 1. Claude 写代码（使用 Claude Code 正常工具）
 # 2. Gemini 审查
-cat generated.js | pgeminip -p "审查此代码的 bug 和安全问题" || \
-cat generated.js | pgeminif -p "审查此代码的 bug 和安全问题"
+cat generated.js | pgemini-pro -p "审查此代码的 bug 和安全问题" || \
+cat generated.js | pgemini-flash -p "审查此代码的 bug 和安全问题"
 ```
 
 ### Gemini 生成，Claude 审查
@@ -322,13 +322,13 @@ echo "聚焦认证流程" | pgemini -r 1 -o text
 
 ```bash
 # 正确写法：重复传递输入
-cat file.js | pgeminip -p "审查此代码" || \
-cat file.js | pgeminif -p "审查此代码"
+cat file.js | pgemini-pro -p "审查此代码" || \
+cat file.js | pgemini-flash -p "审查此代码"
 
 # 或使用变量存储
 CONTENT=$(cat file.js)
-echo "$CONTENT" | pgeminip -p "审查此代码" || \
-echo "$CONTENT" | pgeminif -p "审查此代码"
+echo "$CONTENT" | pgemini-pro -p "审查此代码" || \
+echo "$CONTENT" | pgemini-flash -p "审查此代码"
 ```
 
 ### 适用场景

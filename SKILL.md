@@ -36,11 +36,12 @@ echo "https_proxy=$https_proxy http_proxy=$http_proxy"
 ```bash
 # 添加到 ~/.zshrc 或 ~/.bashrc
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
-alias pgeminif='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
-alias pgeminip='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
+alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
+alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
 
 # 后续命令简化为：
-pgeminip -p "提示词"
+pgemini-pro -p "提示词"
+pgemini-flash -p "提示词"  # 快速模型
 ```
 
 ### 单命令代理设置（临时）
@@ -139,7 +140,7 @@ gemini -p "[prompt]" --yolo -o text 2>&1
 - "立即开始"
 - "不做确认直接执行"
 
-**速率限制**：免费层 60请求/分钟，1000/天。CLI 自动重试带回退。预期看到"quota will reset after Xs"消息。
+**速率限制**：免费层有请求频率限制（具体数值以 Google 官方文档为准）。CLI 自动重试带回退。预期看到"quota will reset after Xs"消息。
 
 ### 4. 输出处理
 
@@ -170,13 +171,13 @@ pgemini -p "创建 [描述] 包含 [功能]。输出完整文件内容。" --yol
 
 ```bash
 # 正确写法：重复传递 cat 输入
-cat 文件路径 | pgeminip -p "审查提示词" || \
-cat 文件路径 | pgeminif -p "审查提示词"
+cat 文件路径 | pgemini-pro -p "审查提示词" || \
+cat 文件路径 | pgemini-flash -p "审查提示词"
 
 # 或使用变量存储文件内容
 FILE_CONTENT=$(cat 文件路径)
-echo "$FILE_CONTENT" | pgeminip -p "审查提示词" || \
-echo "$FILE_CONTENT" | pgeminif -p "审查提示词"
+echo "$FILE_CONTENT" | pgemini-pro -p "审查提示词" || \
+echo "$FILE_CONTENT" | pgemini-flash -p "审查提示词"
 ```
 
 ### Bug修复
@@ -251,8 +252,8 @@ pgemini -p "[主题] 最新情况是什么？使用 Google Search。" -o text
 
 ```bash
 # 正确写法：fallback 时重新传递输入
-cat 文件路径 | pgeminip -p "审查提示词" || \
-cat 文件路径 | pgeminif -p "审查提示词"
+cat 文件路径 | pgemini-pro -p "审查提示词" || \
+cat 文件路径 | pgemini-flash -p "审查提示词"
 ```
 
 ## 错误处理
@@ -269,6 +270,17 @@ cat 文件路径 | pgeminif -p "审查提示词"
 - 验证 Gemini 认证：`gemini --version`
 - 检查 `~/.gemini/settings.json` 配置问题
 - 确认代理设置正确
+
+### 常见错误码
+
+| 错误码/消息 | 含义 | 解决方案 |
+|------------|------|----------|
+| `429` / `quota will reset` | 速率限制触发 | 等待重置或切换 Flash 模型 |
+| `401` / `API key not found` | 认证失败 | 检查 `GEMINI_API_KEY` 或重新 OAuth |
+| `403` | 权限不足 | 检查账户权限或模型访问限制 |
+| `400` / `context_overflow` | 输入超长 | 使用 `.geminiignore` 或精简输入 |
+| `network timeout` | 网络超时 | 检查代理设置或网络连接 |
+| `tool_call_failed` | 工具调用失败 | 查看详细日志，检查权限 |
 
 ### 生成后验证
 
