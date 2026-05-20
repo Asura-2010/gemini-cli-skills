@@ -37,7 +37,7 @@ echo "https_proxy=$https_proxy http_proxy=$http_proxy"
 # 添加到 ~/.zshrc 或 ~/.bashrc
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
 alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
-alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
+alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.5-flash-preview --skip-trust'
 
 # 后续命令简化为：
 pgemini-pro -p "提示词"
@@ -68,8 +68,7 @@ gemini -m gemini-3.1-pro-preview --skip-trust --yolo -p "提示词"
 | 优先级 | 模型 | 说明 |
 |-------|------|------|
 | 首选 | `gemini-3.1-pro-preview` | 最强推理能力 |
-| 备用 | `gemini-3-flash-preview` | 速度快，Pro 额度用完时自动切换 |
-| 旧版 | `gemini-2.5-flash` | 兼容旧版本 CLI |
+| 备用 | `gemini-3.5-flash-preview` | 最新 Flash 模型，速度极快，Pro 额度用完时自动切换 |
 
 ## 使用时机
 
@@ -131,7 +130,7 @@ gemini -p "[prompt]" --yolo -o text 2>&1
 - `--skip-trust`: 跳过信任检查
 - `-o text`: 人类可读输出
 - `-o json`: 结构化输出带统计
-- `-m gemini-3-flash-preview`: 简单任务用快速模型
+- `-m gemini-3.5-flash-preview`: 简单任务用快速模型
 
 ### 3. 关键行为注意
 
@@ -261,7 +260,7 @@ cat 文件路径 | pgemini-flash -p "审查提示词"
 ### 速率限制超出
 
 - CLI 自动重试带回退
-- 使用 `-m gemini-3-flash-preview` 处理低优先级任务
+- 使用 `-m gemini-3.5-flash-preview` 处理低优先级任务
 - 长操作后台运行
 
 ### 命令失败

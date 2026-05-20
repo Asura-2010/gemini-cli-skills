@@ -103,11 +103,7 @@ pgemini -p "创建测试" --yolo -o text > tests.log 2>&1 &
 ```
 任务复杂吗（架构、多文件、深度分析）？
 ├── 是 → 使用 Pro (gemini-3.1-pro-preview) → pgemini-pro
-└── 否 → 速度关键吗？
-    ├── 是 → 使用 Flash (gemini-3-flash-preview) → pgemini-flash
-    └── 否 → 任务琐碎吗（格式化、简单查询）？
-        ├── 是 → 使用 Flash Lite (gemini-2.5-flash-lite)
-        └── 否 → 使用 Flash (gemini-3-flash-preview) → pgemini-flash
+└── 否 → 使用 Flash (gemini-3.5-flash-preview) → pgemini-flash
 ```
 
 ### 示例
@@ -118,9 +114,6 @@ pgemini-pro -p "分析代码库架构" -o text
 
 # 快速：简单格式化
 pgemini-flash -p "格式化此 JSON" -o text
-
-# 琐碎：一句话
-pgemini -m gemini-2.5-flash-lite -p "2+2等于几？" -o text
 ```
 
 ## Pattern 5: 速率限制处理

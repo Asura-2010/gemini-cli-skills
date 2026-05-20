@@ -74,7 +74,7 @@ gemini
 | 优先级 | 模型 | 说明 |
 |-------|------|------|
 | 首选 | `gemini-3.1-pro-preview` | 最强推理能力 |
-| 备用 | `gemini-3-flash-preview` | 速度快，Pro 额度用完时切换 |
+| 备用 | `gemini-3.5-flash-preview` | 最新 Flash，速度极快，Pro 额度用完时切换 |
 
 ## 快速参考
 
@@ -101,7 +101,7 @@ pgemini -p "用 codebase_investigator 分析项目" -o text
 # 根据实际代理软件调整端口（示例为 Clash 默认端口 7890）
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
 alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
-alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
+alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.5-flash-preview --skip-trust'
 ```
 
 ## 为什么在 Claude Code 中使用 Gemini？

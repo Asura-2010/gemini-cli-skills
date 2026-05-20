@@ -35,7 +35,7 @@ echo "https_proxy=$https_proxy http_proxy=$http_proxy"
 ```bash
 # 添加到 ~/.zshrc 或 ~/.bashrc
 alias pgemini='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini'
-alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3-flash-preview --skip-trust'
+alias pgemini-flash='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.5-flash-preview --skip-trust'
 alias pgemini-pro='https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 gemini -m gemini-3.1-pro-preview --skip-trust'
 
 # 后续命令简化为：
@@ -98,9 +98,7 @@ echo 'export http_proxy=http://127.0.0.1:7890' >> ~/.zshrc
 | 模型 | 用途 | 上下文 |
 |------|------|--------|
 | `gemini-3.1-pro-preview` | 复杂任务（首选） | 1M tokens |
-| `gemini-3-flash-preview` | 快速任务 | Large |
-| `gemini-2.5-flash` | 旧版兼容 | Large |
-| `gemini-2.5-flash-lite` | 最快，简单任务 | Medium |
+| `gemini-3.5-flash-preview` | 最新 Flash，快速任务 | Large |
 
 ```bash
 # 首选 Pro 模型（使用 alias）
@@ -298,7 +296,7 @@ echo "continue" | gemini -r latest -o text
 
 ### 缓解策略
 
-1. 使用 `gemini-3-flash-preview` 处理简单任务
+1. 使用 `gemini-3.5-flash-preview` 处理简单任务
 2. 批量操作合并到单个提示词
 3. 长任务后台运行
 
